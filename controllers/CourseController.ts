@@ -1,59 +1,46 @@
 import CourseControllerI from "../interfaces/CourseController";
 import {Express, Request, Response} from "express";
 import CourseDao from "../daos/CourseDao";
+import Course from "../models/Course";
 
 export default class CourseController implements CourseControllerI {
+    private courseDao: CourseDao = CourseDao.getInstance();
     constructor(app: Express) {
         app.get("/courses", this.findAllCourses);
         app.get("/courses/:cid", this.findCourseById);
         app.post("/courses", this.createCourse);
         app.put("/courses/:cid", this.updateCourse);
         app.delete("/courses/:cid", this.deleteCourse);
+        app.post("/courses/:cid/section/:sid", this.addSectionToCourse);
+        app.delete("/courses/:cid/section/:sid", this.removeSectionFromCourse);
     }
-    findAllCourses(req: Request, res: Response): void {
-        CourseDao.getInstance().findAllCourses()
+    findAllCourses = (req: Request, res: Response): Promise<any> =>
+        this.courseDao.findAllCourses()
             .then(courses => res.json(courses));
-    }
-    findAllCoursesDeep(req: Request, res: Response): void {
-        CourseDao.getInstance().findAllCoursesDeep()
+    findCourseById = (req: Request, res: Response): Promise<any> =>
+        this.courseDao.findCourseById(req.params.cid)
+            .then(course => res.json(course));
+    findAllCoursesDeep = (req: Request, res: Response): Promise<any> =>
+        this.courseDao.findAllCoursesDeep()
             .then(courses => res.json(courses));
-    }
-    findCourseById(req: Request, res: Response): void {
-        const cid = req.params.cid;
-        CourseDao.getInstance().findCourseById(cid)
+    findCourseByIdDeep = (req: Request, res: Response): Promise<any> =>
+        this.courseDao.findCourseByIdDeep(req.params.cid)
             .then(course => res.json(course));
-    }
-    findCourseByIdDeep(req: Request, res: Response): void {
-        const cid = req.params.cid;
-        CourseDao.getInstance().findCourseByIdDeep(cid)
+    createCourse = (req: Request, res: Response): Promise<any> =>
+        this.courseDao.createCourse(req.body)
             .then(course => res.json(course));
-    }
-    createCourse(req: Request, res: Response): void {
-        const course = req.body;
-        CourseDao.getInstance().createCourse(course)
-            .then(course => res.json(course));
-    }
-    deleteCourse(req: Request, res: Response): void {
-        const cid = req.params.cid;
-        CourseDao.getInstance().deleteCourse(cid)
+    updateCourse = (req: Request, res: Response): Promise<any> =>
+        this.courseDao.updateCourse(req.params.cid, req.body)
             .then(status => res.send(status));
-    }
-    updateCourse(req: Request, res: Response): void {
-        const cid = req.params.cid;
-        const course = req.body;
-        CourseDao.getInstance().updateCourse(cid, course)
+    deleteCourse = (req: Request, res: Response): Promise<any> =>
+        this.courseDao.deleteCourse(req.params.cid)
             .then(status => res.send(status));
-    }
-    addSectionToCourse(req: Request, res: Response): void {
-        const cid = req.params.cid;
-        const sid = req.params.sid;
-        CourseDao.getInstance().addSectionToCourse(cid, sid)
+    addSectionToCourse = (req: Request, res: Response): Promise<any> =>
+        this.courseDao
+            .addSectionToCourse(req.params.cid, req.params.sid)
             .then(status => res.send(status));
-    }
-    removeSectionFromCourse(req: Request, res: Response): void {
-        const cid = req.params.cid;
-        const sid = req.params.sid;
-        CourseDao.getInstance().removeSectionFromCourse(cid, sid)
+    removeSectionFromCourse = (req: Request, res: Response): Promise<any> =>
+        this.courseDao
+            .removeSectionFromCourse(req.params.cid, req.params.sid)
             .then(status => res.send(status));
-    }
 }
