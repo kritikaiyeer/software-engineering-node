@@ -1,3 +1,6 @@
+/**
+ * @file Server file
+ */
 import express from 'express';
 import CourseController from "./controllers/CourseController";
 import mongoose from "mongoose";

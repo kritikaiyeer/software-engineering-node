@@ -1,3 +1,6 @@
+/**
+ * @file Course data model
+ */
 import {Schema, Types} from "mongoose";
 
 export default class Course {
