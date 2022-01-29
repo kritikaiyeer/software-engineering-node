@@ -7,8 +7,8 @@ import mongoose from "mongoose";
 const app = express();
 mongoose.connect('mongodb://localhost:27017/cs5500-test-123');
 
-app.get('/hello', (req: Request, res: Response) =>
-    res.send('Hello World!'));
+app.get('/', (req: Request, res: Response) =>
+    res.send('Welcome!'));
 
 app.get('/add/:a/:b', (req: Request, res: Response) =>
     res.send(req.params.a + req.params.b));
