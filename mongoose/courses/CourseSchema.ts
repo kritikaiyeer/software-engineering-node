@@ -1,8 +1,14 @@
 import mongoose from "mongoose";
-// import Course from "../../models/Course";
 import Course from "./Course";
-// const CourseSchema = new mongoose.Schema();
-// CourseSchema.loadClass(Course);
+
+/**
+ * @typedef Course Represents online courses
+ * @property {string} title The course's title
+ * @property {number} credits How many credits
+ * @property {string} syllabus Course's syllabus
+ * @property {ObjectId[]} sections Array of Section IDs
+ */
+
 const CourseSchema = new mongoose.Schema<Course>({
     title: String,
     credits: Number,
