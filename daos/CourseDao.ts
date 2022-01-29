@@ -32,7 +32,7 @@ export default class CourseDao implements CourseDaoI {
             .populate("sections")
             .exec();
     }
-    async findCourseByIdDeep(cid: string): Promise<Course> {
+    async findCourseByIdDeep(cid: string): Promise<any> {
         return await CourseModel
             .findById(cid)
             .populate("sections")

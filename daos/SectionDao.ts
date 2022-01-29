@@ -17,7 +17,7 @@ export default class SectionDao implements SectionDaoI {
     async findSectionById(sid: string): Promise<any> {
         return await SectionModel.findById(sid);
     }
-    async findSectionByIdDeep(sid: string): Promise<Section> {
+    async findSectionByIdDeep(sid: string): Promise<any> {
         return await SectionModel
             .findById(sid)
             .populate("course")
