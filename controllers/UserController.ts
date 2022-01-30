@@ -21,14 +21,6 @@ export default class UserController implements UserControllerI {
 
     private constructor() {}
 
-    // constructor(app: Express) {
-    //     app.get("/api/hello", (req, res) => res.send('hello from users'));
-    //     app.get("/api/users", this.findAllUsers);
-    //     app.get("/api/users/:uid", this.findAllUsers);
-    //     app.post("/api/users", this.createUser);
-    //     app.put("/api/users/:uid", this.updateUser);
-    //     app.delete("/api/users/:uid", this.deleteUser);
-    // }
     findAllUsers = (req: Request, res: Response) =>
         UserController.userDao.findAllUsers()
             .then((users: User[]) => res.json(users));
