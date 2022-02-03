@@ -3,13 +3,13 @@
  */
 import express, {Request, Response} from 'express';
 import mongoose from "mongoose";
+mongoose.connect('mongodb+srv://giuseppi:supersecretpassword@cluster0.m8jeh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 import bodyParser from "body-parser";
 import CourseController from "./controllers/CourseController";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
 const app = express();
-mongoose.connect('mongodb://localhost:27017/cs5500-test-123');
 app.use(bodyParser.json())
 
 app.get('/', (req: Request, res: Response) =>
