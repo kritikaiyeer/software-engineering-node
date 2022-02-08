@@ -1,11 +1,12 @@
 import express, {Request, Response} from 'express';
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
+dotenv.config();
 
 const app = express();
-
-mongoose.connect('mongodb://localhost:27017/tuiter'); // connect to the movie-db database
+mongoose.connect('mongodb+srv://tuiteradmin:'+process.env.DB_PASSWORD +'@cluster0.yj2qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'); // connect to the movie-db database
 app.use(express.json())
 
 app.get('/', (req: Request, res: Response) =>
