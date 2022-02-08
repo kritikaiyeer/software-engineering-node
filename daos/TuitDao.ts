@@ -13,20 +13,20 @@ export default class TuitDao implements TuitDaoI {
   async findAllTuits(): Promise<Tuit[]> {
     return await TuitModel.find();
   }
-  async findTuitsByUser(userId: string): Promise<Tuit[]> {
-    return await TuitModel.find({author: userId}); //changed
+  async findTuitsByUser(uid: string): Promise<Tuit[]> {
+    return await TuitModel.find({ postedBy: uid }); //changed
   }
-  async findTuitById(tid: string): Promise<any> {
-    return await TuitModel.findById(tid).populate("author").exec(); //changed
+  async findTuitById(uid: string): Promise<any> {
+    return await TuitModel.findById(uid).populate("postedBy").exec(); //changed
   }
   async createTuit(uid: string, tuit: Tuit): Promise<any> {
     //changed
-    return await TuitModel.create({...tuit, postedBy: uid});
+    return await TuitModel.create({ ...tuit, postedBy: uid });
   }
-  async deleteTuit(tid: string): Promise<any> {
-    return await TuitModel.deleteOne({ _id: tid }); //changed
+  async deleteTuit(uid: string): Promise<any> {
+    return await TuitModel.deleteOne({ postedBy: uid }); //changed
   }
-  async updateTuit(tid: string, tuit: Tuit): Promise<any> {
-    return await TuitModel.updateOne({ _id: tid }, { $set: tuit }); //changed
+  async updateTuit(uid: string, tuit: Tuit): Promise<any> {
+    return await TuitModel.updateOne({ postedBy: uid }, { $set: tuit }); //changed
   }
 }

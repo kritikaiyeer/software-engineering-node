@@ -21,6 +21,7 @@ export default class UserDao implements UserDaoI {
         UserModel.find().exec();
     findUserById = async (uid: string): Promise<any> =>
         UserModel.findById(uid);
+    
     createUser = async (user: User): Promise<User> =>
         UserModel.create(user);
     updateUser = async (uid: string, user: User): Promise<any> =>
