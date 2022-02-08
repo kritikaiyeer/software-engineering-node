@@ -1,13 +1,12 @@
 import express, {Request, Response} from 'express';
 import mongoose from "mongoose";
-import bodyParser from "body-parser";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/tuiter'); // connect to the movie-db database
-app.use(bodyParser.json())
+app.use(express.json())
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));
