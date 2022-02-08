@@ -10,11 +10,11 @@ export default class TuitController implements TuitControllerI {
       TuitController.tuitController = new TuitController();
       app.get("/api/hello", (req, res) => res.send("This is tuiter"));
       app.get("/api/tuits", TuitController.tuitController.findAllTuits);
-      app.get("/api/users/:uid/tuits",TuitController.tuitController.findTuitsByUser); //doesnt work
-      app.get("/api/tuits/:uid", TuitController.tuitController.findTuitById); //not
-      app.post("/api/users/:uid/tuits", TuitController.tuitController.createTuit); //works
-      app.put("/api/tuits/:uid", TuitController.tuitController.updateTuit); //doesnt work
-      app.delete("/api/tuits/:uid", TuitController.tuitController.deleteTuit); // not
+      app.get("/api/users/:uid/tuits",TuitController.tuitController.findTuitsByUser); 
+      app.get("/api/tuits/:uid", TuitController.tuitController.findTuitById); 
+      app.post("/api/users/:uid/tuits", TuitController.tuitController.createTuit); 
+      app.put("/api/tuits/:uid", TuitController.tuitController.updateTuit); 
+      app.delete("/api/tuits/:uid", TuitController.tuitController.deleteTuit); 
     }
     return TuitController.tuitController;
   };
