@@ -1,6 +1,6 @@
-import User from "../models/users/User";
 import UserDao from "../daos/UserDao";
 import mongoose from "mongoose";
+
 const userDao: UserDao = UserDao.getInstance();
 
 const PROTOCOL = "mongodb+srv";
@@ -14,44 +14,40 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
 mongoose.connect(connectionString);
 
 
-export const login = async (username: string, password: string) => {
-    
-    try {
-        const user = await userDao.findUserByCredentials(username, password);
-        if(!user) {
-            throw "Unknown user";
-        }
-        console.log(user);
-    } catch (e) {
-        console.log(e);
+export const login = async (u: string, p: string) => {
+  try {
+    const user = await userDao.findUserByCredentials(u, p);
+    if (!user) {
+      throw "Unknown user";
     }
+    return user;
+  } catch (e) {
+    return e;
+  }
 }
 
-export const register = async (username: string, password: string, email: string) => {
-    
-    try {
-        const user = await userDao.findUserByUsername(username);
-        if (user) {
-            throw 'User already exists';
-        }
-        const newUser = await userDao.createUser({username, password, email});
-        console.log(newUser);
-    } catch (e) {
-        console.log(e);
+export const register = async (u: string, p: string, e: string) => {
+  try {
+    const user = await userDao.findUserByUsername(u);
+    if (user) {
+      throw 'User already exists';
     }
+    const newUser = await userDao.createUser({username: u, password: p, email: e});
+    return newUser;
+  } catch (e) {
+    return e;
+  }
 }
 
 export const initializeSalaries = async (salary: number) => {
-    const users = await userDao.findAllUsers()
-    const salaryPromises = users.map(user =>
-        userDao.updateUserSalaryByUsername(user.username, salary));
-    const values = await Promise.all(salaryPromises);
-    console.log(values);
+  const users = await userDao.findAllUsers()
+  const salaryPromises = users.map(user =>
+    userDao.updateUserSalaryByUsername(user.username, salary));
+  const values = await Promise.all(salaryPromises);
+  return values;
 }
 
-
-
-// register('alice678', 'alice234', 'alice234@gmail.com')
+register('alice678', 'alice234', 'alice234@gmail.com')
 
 login('alice678', 'alice234')
 // login('alice', 'alice123')
