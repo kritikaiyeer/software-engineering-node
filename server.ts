@@ -2,15 +2,21 @@
  * @file Server file
  */
 import express, {Request, Response} from 'express';
-import mongoose from "mongoose";
-import bodyParser from "body-parser";
 import CourseController from "./controllers/CourseController";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
+import mongoose from "mongoose";
+
+// connect to the database
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.m8jeh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+mongoose.connect(connectionString);
+
+// create RESTful Web service API
 const app = express();
-mongoose.connect('mongodb://localhost:27017/cs5500-test-123');
-app.use(bodyParser.json())
+app.use(express.json());
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));
