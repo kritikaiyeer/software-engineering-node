@@ -1,3 +1,8 @@
+/**
+ * @file Implements mongoose model to CRUD
+ * documents in the courses collection
+ */
+
 import mongoose from "mongoose";
 import CourseSchema from "./CourseSchema";
 import Course from "./Course";

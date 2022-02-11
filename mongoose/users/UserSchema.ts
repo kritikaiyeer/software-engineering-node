@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema<User>({
         latitude: Number,
         longitude: Number
     },
+    salary: {type: Number, default: 50000}
 }, {collection: "users"});
 
 export default UserSchema;
