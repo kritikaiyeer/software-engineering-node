@@ -3,6 +3,10 @@ mongoose.connect('mongodb://localhost:27017/cs5500-test-123');
 import SectionDao from './SectionDao';
 import CourseDao from "./CourseDao";
 
+test('test course dao', () => {
+
+});
+
 const courseDao = CourseDao.getInstance();
 const sectionDao = SectionDao.getInstance();
 sectionDao.findAllSectionsDeep()
