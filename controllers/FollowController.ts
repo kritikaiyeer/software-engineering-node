@@ -36,8 +36,8 @@
             FollowController.followController = new FollowController();
              app.get("/api/users/:uid/followed", FollowController.followController.findAllUsersThatFollowUser);
              app.get("/api/users/:uid/following", FollowController.followController.findAllUsersFollowedByUser);
-             app.post("/api/user/:uid/follow/:uidFollowing", FollowController.followController.userFollowsUser);
-             app.delete("/api/user/:uid/unfollow/:uidFollowing", FollowController.followController.userUnfollowsUser);
+             app.post("/api/users/:uid/follow/:uidFollowing", FollowController.followController.userFollowsUser);
+             app.delete("/api/users/:uid/unfollow/:uidFollowing", FollowController.followController.userUnfollowsUser);
          }
          return FollowController.followController;
      }
