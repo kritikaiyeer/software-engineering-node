@@ -6,7 +6,7 @@
  import FollowControllerI from "../interfaces/FollowControllerI";
  
  /**
-  * @class FollowController Implements RESTful Web service API for likes resource.
+  * @class FollowController Implements RESTful Web service API for follow resource.
   * Defines the following HTTP endpoints:
   * <ul>
   *     <li>GET /users/:uid/following to retrieve all the users followed by a user
@@ -18,7 +18,7 @@
   *     <li>DELETE/user/:uid/unfollow/:uid to record that a user
   *     no londer follows a user</li>
   * </ul>
-  * @property {FollowDao} followDao Singleton DAO implementing likes CRUD operations
+  * @property {FollowDao} followDao Singleton DAO implementing follow CRUD operations
   * @property {FollowController} FollowController Singleton controller implementing
   * RESTful Web service API
   */
@@ -45,11 +45,11 @@
      private constructor() {}
  
      /**
-      * Retrieves all users that liked a tuit from the database
+      * Retrieves all users that follow a particular user
       * @param {Request} req Represents request from client, including the path
-      * parameter tid representing the liked tuit
+      * parameter uid representing user
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the user objects
+      * body formatted as JSON arrays containing the follow objects
       */
       findAllUsersThatFollowUser = (req: Request, res: Response) =>
         FollowController.followDao.findAllUsersThatFollowUser(req.params.uid)
@@ -68,10 +68,10 @@
  
      /**
       * @param {Request} req Represents request from client, including the
-      * path parameters uid and tid representing the user that is liking the tuit
-      * and the tuit being liked
+      * path parameters uid and uidFollowing representing the user that is following another user
+      * and other user is being followed.
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON containing the new likes that was inserted in the
+      * body formatted as JSON containing the new follow that was inserted in the
       * database
       */
       userFollowsUser = (req: Request, res: Response) =>
@@ -80,10 +80,10 @@
  
      /**
       * @param {Request} req Represents request from client, including the
-      * path parameters uid and tid representing the user that is unliking
-      * the tuit and the tuit being unliked
+      * path parameters uid and uidFollowing representing the user that is unfollowing
+      * another user and the other user being unfollowed
       * @param {Response} res Represents response to client, including status
-      * on whether deleting the like was successful or not
+      * on whether deleting the follow was successful or not
       */
       userUnfollowsUser = (req: Request, res: Response) =>
          FollowController.followDao.userUnfollowsUser(req.params.uid, req.params.uidFollowing)
