@@ -55,6 +55,9 @@ export default class UserController implements UserControllerI {
                 UserController.userController.deleteUser);
             app.delete("/api/users",
                 UserController.userController.deleteAllUsers);
+
+            app.post("/api/login",
+                UserController.userController.login);
         }
         return UserController.userController;
     }
@@ -128,7 +131,8 @@ export default class UserController implements UserControllerI {
             .then((status) => res.send(status));
     
     login = (req: Request, res: Response) =>
-        UserController.userDao.findUserByCredentials(req.body.username, req.body.password)
+        UserController.userDao
+            .findUserByCredentials(req.body.username, req.body.password)
             .then(user => {
                 res.json(user)
             });
