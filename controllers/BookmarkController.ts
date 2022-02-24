@@ -32,9 +32,9 @@
      public static getInstance = (app: Express): BookmarkController => {
          if(BookmarkController.bookmarkController === null) {
             BookmarkController.bookmarkController = new BookmarkController();
-             app.get("/api/users/:uid/bookmark", BookmarkController.bookmarkController.findAllTuitsBookmarkedByUser);
-             app.post("/api/users/:uid/bookmark/:tid", BookmarkController.bookmarkController.userBookmarksTuit);
-             app.delete("/api/users/:uid/bookmark/:tid", BookmarkController.bookmarkController.userUnbookmarksTuit);
+             app.get("/api/users/:uid/bookmarks", BookmarkController.bookmarkController.findAllTuitsBookmarkedByUser);
+             app.post("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userBookmarksTuit);
+             app.delete("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userUnbookmarksTuit);
          }
          return BookmarkController.bookmarkController;
      }
