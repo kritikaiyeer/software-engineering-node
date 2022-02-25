@@ -6,7 +6,7 @@
 import mongoose, {Schema} from "mongoose";
 import Like from "../models/Likes";
 /**
-* @typedef Bookmark Represents Bookmark
+* @typedef Like Represents Like
 * @property {ObjectId[]} tuit Tuid Id  liked
 * @property {ObjectId[]} likedBy User Id who liked the tuit
 */

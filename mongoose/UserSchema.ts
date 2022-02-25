@@ -9,7 +9,7 @@ import User from "../models/User";
 * @property {String} username username of the user
 * @property {String} password password of user
 * @property {String} firstName firstName of the user
-* @property {String} lastName password of user
+* @property {String} lastName lastName of user
 * @property {String} email email of user
 * @property {String} profilePhoto profile photo
 * @property {String} headerImage header image

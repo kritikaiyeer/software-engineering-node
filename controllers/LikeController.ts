@@ -6,7 +6,7 @@
  import LikeControllerI from "../interfaces/LikeControllerI";
  
  /**
-  * @class TuitController Implements RESTful Web service API for likes resource.
+  * @class LikeController Implements RESTful Web service API for likes resource.
   * Defines the following HTTP endpoints:
   * <ul>
   *     <li>GET /api/users/:uid/likes to retrieve all the tuits liked by a user

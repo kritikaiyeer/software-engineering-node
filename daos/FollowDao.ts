@@ -19,16 +19,28 @@ export default class FollowDao implements FollowDaoI {
         return FollowDao.followDao;
     }
     private constructor() {}
+    /**
+      * Retrieves all users that follow a particular user
+      * @param {String} uid uid representing user
+    **/
     findAllUsersThatFollowUser = async (uid: string): Promise<Follow[]> =>
         FollowModel
             .find({userFollowing: uid})
             .populate("userFollowed")
             .exec();
+    /**
+      * Retrieves all users followed by user from the database
+      * @param {String} uid user liked the tuits
+    */
     findAllUsersFollowedByUser = async (uid: string): Promise<Follow[]> =>
     FollowModel
             .find({userFollowed: uid})
             .populate("userFollowing")
             .exec();
+    /**
+      * @param {Request} uid user id
+      * @param {Response} uidFollowing user id following
+    */
     userFollowsUser = async (uid: string, uidFollowing: string): Promise<any> =>
         FollowModel.create({userFollowed: uid, userFollowing: uidFollowing});
     userUnfollowsUser = async (uid: string, uidFollowing: string): Promise<any> =>

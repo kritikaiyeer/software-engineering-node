@@ -6,7 +6,7 @@ import mongoose, {Schema} from "mongoose";
 import Message from "../models/Message";
 /**
 * @typedef Message Represents Message
-* @property {String} message user id  sending message
+* @property {String} message message
 * @property {ObjectId[]} to user id  sending message
 * @property {ObjectId[]} from user id receiving message
 * @property {Date} sentOn Date
