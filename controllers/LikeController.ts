@@ -29,7 +29,7 @@
       * Creates singleton controller instance
       * @param {Express} app Express instance to declare the RESTful Web service
       * API
-      * @return TuitController
+      * @return LikeController
       */
      public static getInstance = (app: Express): LikeController => {
          if(LikeController.likeController === null) {
@@ -49,7 +49,7 @@
       * @param {Request} req Represents request from client, including the path
       * parameter tid representing the liked tuit
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the user objects
+      * body formatted as JSON arrays containing the users that liked a tuit
       */
      findAllUsersThatLikedTuit = (req: Request, res: Response) =>
          LikeController.likeDao.findAllUsersThatLikedTuit(req.params.tid)
@@ -60,7 +60,7 @@
       * @param {Request} req Represents request from client, including the path
       * parameter uid representing the user liked the tuits
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the tuit objects that were liked
+      * body formatted as JSON arrays containing the tuit objects that were liked by user
       */
      findAllTuitsLikedByUser = (req: Request, res: Response) =>
          LikeController.likeDao.findAllTuitsLikedByUser(req.params.uid)

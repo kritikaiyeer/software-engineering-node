@@ -1,6 +1,16 @@
+/**
+ * @file Implements DAO managing data storage of likes. Uses mongoose LikeModel
+ * to integrate with MongoDB
+ */
 import LikeDaoI from "../interfaces/LikeDaoI";
 import LikeModel from "../mongoose/LikeModel";
 import Like from "../models/Likes";
+/**
+ * Implements Data Access Object managing data storage
+ * of Likes
+ * @implements {LikeDaoI} LikeDaoI
+ * @property {LikeDao} likeDao Private single instance of LikeDao
+ */
 export default class LikeDao implements LikeDaoI {
     private static likeDao: LikeDao | null = null;
     public static getInstance = (): LikeDao => {

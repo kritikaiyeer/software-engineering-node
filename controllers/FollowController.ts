@@ -13,9 +13,9 @@
   *     </li>
   *     <li>GET /users/:uid/followed to retrieve all users that following them
   *     </li>
-  *     <li>POST/user/:uid/follow/:uid to record that a user follows another user
+  *     <li>POST/user/:uid/follow/:uidFollowing to record that a user follows another user
   *     </li>
-  *     <li>DELETE/user/:uid/unfollow/:uid to record that a user
+  *     <li>DELETE/user/:uid/unfollow/:uidFollowing to record that a user
   *     no londer follows a user</li>
   * </ul>
   * @property {FollowDao} followDao Singleton DAO implementing follow CRUD operations
@@ -60,7 +60,7 @@
       * @param {Request} req Represents request from client, including the path
       * parameter uid representing the user liked the tuits
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the tuit objects that were liked
+      * body formatted as JSON arrays containing the users followed by user
       */
       findAllUsersFollowedByUser = (req: Request, res: Response) =>
          FollowController.followDao.findAllUsersFollowedByUser(req.params.uid)

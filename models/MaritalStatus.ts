@@ -1,3 +1,6 @@
+/**
+ * @file Implements MaritalStatus interface
+ */
 enum MaritalStatus {
     Married = 'MARRIED',
     Single = 'SINGLE',

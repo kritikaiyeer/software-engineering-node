@@ -9,13 +9,13 @@
   * @class MessageController Implements RESTful Web service API for Message resource.
   * Defines the following HTTP endpoints:
   * <ul>
-  *     <li>GET /api/user/:from/message to retrieve all the message sent by user
+  *     <li>GET /api/users/:uid/messages/sent to retrieve all the message sent by user
   *     </li>
-  *     <li>GET /api/user/:to/message to retrieve all message sent to user
+  *     <li>GET /api/users/:uid/messages/received to retrieve all message sent to user
   *     </li>
-  *     <li>POST/api/users/:from/message/:to to record that a user sent message to another user
+  *     <li>POST /api/users/:from/messages/:to to record that a user sent message to another user
   *     </li>
-  *     <li>DELETE/api/users/:from/message/:_id to record that a user
+  *     <li>DELETE /api/users/:from/messages/:id to record that a user
   *     unsent a message</li>
   * </ul>
   * @property {MessageDao} messageDao Singleton DAO implementing message CRUD operations
@@ -29,7 +29,7 @@
       * Creates singleton controller instance
       * @param {Express} app Express instance to declare the RESTful Web service
       * API
-      * @return FollowController
+      * @return MessageController
       */
      public static getInstance = (app: Express): MessageController => {
          if(MessageController.messageController === null) {
@@ -45,33 +45,33 @@
      private constructor() {}
  
      /**
-      * Retrieves all users that follow a particular user
+      * Retrieves all messages sent by a user
       * @param {Request} req Represents request from client, including the path
       * parameter uid representing user
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the follow objects
+      * body formatted as JSON arrays containing the messages sent by user
       */
       findAllMessagesSentByUser = (req: Request, res: Response) =>
         MessageController.messageDao.findAllMessagesSentByUser(req.params.uid)
              .then(message => res.json(message));
  
      /**
-      * Retrieves all tuits liked by a user from the database
+      * Retrieves all messages sent to user 
       * @param {Request} req Represents request from client, including the path
       * parameter uid representing the user liked the tuits
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the tuit objects that were liked
+      * body formatted as JSON arrays containing the messages that are sent to the user
       */
       findAllMessagesSentToUser = (req: Request, res: Response) =>
          MessageController.messageDao.findAllMessagesSentToUser(req.params.uid)
              .then(message => res.json(message));
  
-     /**
+     /** 
       * @param {Request} req Represents request from client, including the
       * path parameters uid and uidFollowing representing the user that is following another user
       * and other user is being followed.
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON containing the new follow that was inserted in the
+      * body formatted as JSON containing the new message that was inserted in the
       * database
       */
       userSendsMessage = (req: Request, res: Response) =>
@@ -83,7 +83,7 @@
       * path parameters uid and uidFollowing representing the user that is unfollowing
       * another user and the other user being unfollowed
       * @param {Response} res Represents response to client, including status
-      * on whether deleting the follow was successful or not
+      * on whether deleting the message was successful or not
       */
       userUnsendsMessage = (req: Request, res: Response) =>
          MessageController.messageDao.userUnsendsMessage(req.params.from, req.params._id)

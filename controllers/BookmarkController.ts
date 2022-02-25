@@ -9,11 +9,11 @@
   * @class BookmarkController Implements RESTful Web service API for bookmark resource.
   * Defines the following HTTP endpoints:
   * <ul>
-  *     <li>GET /api/users/:uid/bookmark to retrieve all the bookmarked tuits by user
+  *     <li>GET /api/users/:uid/bookmarks to retrieve all the bookmarked tuits by user
   *     </li>
-  *     <li>POST /api/user/:uid/bookmark/:tid to record a user bookmarks a tuit
+  *     <li>POST /api/user/:uid/bookmarks/:tid to record a user bookmarks a tuit
   *     </li>
-  *     <li>DELETE/api/user/:uid/bookmark/:tid to record that a user
+  *     <li>DELETE/api/user/:uid/bookmarks/:tid to record that a user
   *     no londer bookmarks a tuit</li>
   * </ul>
   * @property {BookmarkDao} bookmarkDao Singleton DAO implementing bookmarks CRUD operations
@@ -46,7 +46,7 @@
       * @param {Request} req Represents request from client, including the path
       * parameter uid representing the user
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the user objects
+      * body formatted as JSON arrays containing the tuits bookmarked by user
       */
       findAllTuitsBookmarkedByUser = (req: Request, res: Response) =>
         BookmarkController.bookmarkDao.findAllTuitsBookmarkedByUser(req.params.uid)
