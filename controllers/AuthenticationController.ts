@@ -47,9 +47,15 @@ const AuthenticationController = (app: Express) => {
         }
     }
 
-    const profile = (req: Request, res: Response) =>
+    const profile = (req: Request, res: Response) => {
         // @ts-ignore
-        res.json(req.session['profile']);
+        const profile = req.session['profile'];
+        if (profile) {
+            res.json(profile);
+        } else {
+            res.sendStatus(403);
+        }
+    }
 
     const logout = (req: Request, res: Response) => {
         // @ts-ignore
