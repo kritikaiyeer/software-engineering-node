@@ -41,6 +41,11 @@
              app.post("/api/users/:uid/tuits", TuitController.tuitController.createTuitByUser);
              app.put("/api/tuits/:uid", TuitController.tuitController.updateTuit);
              app.delete("/api/tuits/:uid", TuitController.tuitController.deleteTuit);
+
+             // tuit testing not restfull 
+             app.get("/api/tuits/:content/delete", TuitController.tuitController.deleteTuitByContent);
+             app.get("/api/tuits/delete", TuitController.tuitController.deleteAllTuit);
+
          }
          return TuitController.tuitController;
      }
@@ -109,4 +114,12 @@
      deleteTuit = (req: Request, res: Response) =>
          TuitController.tuitDao.deleteTuit(req.params.uid)
              .then((status) => res.send(status));
+    
+    deleteTuitByContent = (req: Request, res: Response) =>
+    TuitController.tuitDao.deleteTuitByContent(req.params.content)
+        .then((status) => res.send(status));
+    
+    deleteAllTuit = (req: Request, res: Response) =>
+        TuitController.tuitDao.deleteAllTuit()
+            .then((status) => res.send(status));
  };

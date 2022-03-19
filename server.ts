@@ -23,6 +23,7 @@ import LikeController from "./controllers/LikeController";
 import FollowController from "./controllers/FollowController";
 import BookmarkController from './controllers/BookmarkController';
 import MessageController from './controllers/MessageController';
+var cors = require('cors')
 
 
 dotenv.config();
@@ -31,6 +32,7 @@ const app = express();
 // connect to the database
 mongoose.connect('mongodb+srv://tuiteradmin:'+process.env.DB_PASSWORD +'@cluster0.yj2qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'); // connect to the movie-db database
 app.use(express.json())
+app.use(cors());
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));

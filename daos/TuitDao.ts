@@ -24,14 +24,16 @@
       * Retrieves all tuits from the database and returns an array of tuits.
       */
      findAllTuits = async (): Promise<Tuit[]> =>
-         TuitModel.find();
+        TuitModel.find()
+            .populate("postedBy")
+            .exec();;
      /**
       * Retrieves all tuits from the database for a particular user and returns
       * an array of tuits.
       * @param {String} uid user id
       */
      findAllTuitsByUser = async (uid: string): Promise<Tuit[]> =>
-         TuitModel.find({postedBy: uid});
+        TuitModel.find({postedBy: uid})
      /**
       * Retrieves all tuits from the database for a particular tuit id and returns
       * an array of tuits.
@@ -60,4 +62,10 @@
       */
      deleteTuit = async (uid: string): Promise<any> =>
          TuitModel.deleteOne({_id: uid});
+    
+    deleteTuitByContent = async (content: string): Promise<any> =>
+        TuitModel.deleteMany({tuit: content});
+    
+    deleteAllTuit = async (): Promise<any> =>
+        TuitModel.deleteMany({});
  }
