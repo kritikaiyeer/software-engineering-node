@@ -30,7 +30,7 @@ dotenv.config();
 
 const app = express();
 // connect to the database
-mongoose.connect('mongodb+srv://tuiteradmin:'+process.env.DB_PASSWORD +'@cluster0.yj2qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'); // connect to the movie-db database
+mongoose.connect('mongodb+srv://tuiteradmin:'+'tuiter' +'@cluster0.yj2qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'); // connect to the movie-db database
 app.use(express.json())
 app.use(cors());
 
