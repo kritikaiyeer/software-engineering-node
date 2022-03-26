@@ -1,14 +1,5 @@
-/**
- * @file Implements mongoose schema to CRUD
- * documents in the tuit collection
- */
 import mongoose, {Schema} from "mongoose";
 import Tuit from "../models/Tuit";
-/**
-* @typedef Tuit Represents Tuit
-* @property {ObjectId[]} tuit tuit id  
-* @property {ObjectId[]} postedBy user id 
-*/
 const TuitSchema = new mongoose.Schema<Tuit>({
     tuit: {type: String, required: true},
     postedBy: {type: Schema.Types.ObjectId, ref: "UserModel"},
@@ -18,9 +9,9 @@ const TuitSchema = new mongoose.Schema<Tuit>({
     avatarLogo: String,
     imageOverlay: String,
     stats: {
-        replies: Number,
-        retuits: Number,
-        likes: Number
+        replies: {type: Number, default: 0},
+        retuits: {type: Number, default: 0},
+        likes: {type: Number, default: 0}
     }
 }, {collection: "tuits"});
 export default TuitSchema;

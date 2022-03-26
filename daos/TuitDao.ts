@@ -68,4 +68,10 @@
     
     deleteAllTuit = async (): Promise<any> =>
         TuitModel.deleteMany({});
+
+    updateLikes = async (tid: string, newStats: any): Promise<any> =>
+        TuitModel.updateOne(
+            {_id: tid},
+            {$set: {stats: newStats}}
+    );
  }
