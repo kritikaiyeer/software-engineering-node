@@ -16,23 +16,42 @@
 
 import express, {Request, Response} from 'express';
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
 import FollowController from "./controllers/FollowController";
 import BookmarkController from './controllers/BookmarkController';
 import MessageController from './controllers/MessageController';
-var cors = require('cors')
+import AuthenticationController from './controllers/AuthenticationController';
+import SessionController from './controllers/SessionController';
+const cors = require("cors");
+const session = require("express-session");
 
-
-dotenv.config();
-
-const app = express();
 // connect to the database
 mongoose.connect('mongodb+srv://tuiteradmin:'+'tuiter' +'@cluster0.yj2qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'); // connect to the movie-db database
-app.use(express.json())
-app.use(cors());
+const app = express();
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}));
+
+const SECRET = 'process.env.SECRET';
+let sess = {
+    secret: SECRET,
+    saveUninitialized: true,
+    resave: true,
+    cookie: {
+        secure: false
+    }
+}
+
+if (process.env.ENVIRONMENT === 'PRODUCTION') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sess))
+app.use(express.json());
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));
@@ -47,6 +66,9 @@ const likesController = LikeController.getInstance(app);
 const followController = FollowController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const messageController = MessageController.getInstance(app);
+SessionController(app);
+AuthenticationController(app);
+
 
 /**
  * Start a server listening at port 4000 locally
