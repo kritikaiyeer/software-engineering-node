@@ -3,6 +3,6 @@
  * documents in the dislike collection
  */
  import mongoose from "mongoose";
- import DislSchema from "./DislikeSchema";
- const DislikeModel = mongoose.model("DislikeModel", DislSchema);
+ import DislikeSchema from "./DislikeSchema";
+ const DislikeModel = mongoose.model("DislikeModel", DislikeSchema);
  export default DislikeModel;
