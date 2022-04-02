@@ -45,8 +45,8 @@
              app.put("/api/users/:uid/likes/:tid", LikeController.likeController.userTogglesTuitLikes);
              app.put("/api/users/:uid/unlikes/:tid", LikeController.likeController.userTuitunLikes);
              app.put("/api/users/:uid/dislikes/:tid", LikeController.likeController.userDislikesTuit);
-             app.put("/api/users/:uid/dislikes", LikeController.likeController.findAllTuitsDislikedByUser);
-             app.put("/api/users/:tid/dislikes", LikeController.likeController.findAllUsersThatDislikedTuit);
+             app.get("/api/users/:uid/dislikes", LikeController.likeController.findAllTuitsDislikedByUser);
+             app.get("/api/users/:tid/dislikes", LikeController.likeController.findAllUsersThatDislikedTuit);
 
          }
          return LikeController.likeController;
@@ -161,13 +161,14 @@
         try {
             const userAlreadyDislikedTuit = await dislikeDao.findUserDislikesTuit(userId, tid);
             const howManyDislikedTuit = await dislikeDao.countHowManyDisLikedTuit(tid);
+
             let tuit = await tuitDao.findTuitById(tid);
             if (userAlreadyDislikedTuit) {
                //  await likeDao.userUnlikesTuit(userId, tid);
                //  tuit.stats.likes = howManyLikedTuit - 1;
             } else {
-                await LikeController.likeDao.userLikesTuit(userId, tid);
-                tuit.stats.dislike = howManyDislikedTuit + 1;
+                await LikeController.dislikeDao.userDislikesTuit(userId, tid);
+                tuit.stats.dislikes = howManyDislikedTuit + 1;
             };
             await tuitDao.updateDislikes(tid, tuit.stats);
             res.sendStatus(200);
@@ -194,6 +195,7 @@
       * body formatted as JSON arrays containing the tuit objects that were liked
       */
       findAllTuitsDislikedByUser = (req: Request, res: Response) => {
+        console.log("hey")
         const uid = req.params.uid;
         // @ts-ignore
         const profile = req.session['profile'];
@@ -204,6 +206,7 @@
             .then(dislikes => {
                 const dislikesNonNullTuits = dislikes.filter(dislike => dislike.tuit);
                 const tuitsFromDislikes = dislikesNonNullTuits.map(dislike => dislike.tuit);
+                console.log({tuitsFromDislikes})
                 res.json(tuitsFromDislikes);
             });
     }
